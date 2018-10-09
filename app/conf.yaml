@@ -1,0 +1,32 @@
+cap-name: dev-cap
+
+
+collectors:
+
+- name: zues bad ips
+  freq: 1
+  puller:
+    class: webpuller
+    kwargs:
+      url: https://zeustracker.abuse.ch/blocklist.php?download=badips
+      method: get
+  parser:
+    class: simplelist
+    kwargs:
+      label: ip
+  pusher:
+    class: stdoutpusher
+
+- name: zues bad domains
+  freq: 1
+  puller:
+    class: webpuller
+    kwargs:
+      url: https://zeustracker.abuse.ch/blocklist.php?download=baddomains
+      method: get
+  parser:
+    class: simplelist
+    kwargs:
+      label: domain
+  pusher:
+    class: stdoutpusher
